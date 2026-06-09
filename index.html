@@ -124,6 +124,7 @@
     <button class="tab-btn" onclick="showTab('vreg')">来館者数 回帰分析</button>
     <button class="tab-btn" onclick="showTab('fiscal')">財政指標×閉館</button>
     <button class="tab-btn" onclick="showTab('pref')">都道府県別</button>
+    <button class="tab-btn" onclick="showTab('tosan')">企業倒産×閉館</button>
   </div>
 
   <!-- タブ1 -->
@@ -147,6 +148,39 @@
         <li>総数は概ね右肩上がりだが、<strong>R4をピーク</strong>に直近2年は微減・横ばいに転じている。</li>
         <li>R2の急増（+137）は、登録基準変更による追加館154館の一括計上が主因か）。実態的な新設増加とは区別が必要かもしれない。</li>
         <li>H20〜H23は停滞期（リーマンショック後の財政縮小が影響か）。</li>
+      </ul>
+    </div>
+
+    <!-- 社会教育調査との比較 -->
+    <div class="chart-card">
+      <div class="chart-title-row">
+        <div class="chart-title">博物館研究 と 社会教育調査 の比較</div>
+        <button class="dl-btn" onclick="downloadChart('chartSurveyCompare','博物館研究と社会教育調査の比較')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> PNG</button>
+      </div>
+      <div style="font-size:12px;color:var(--text2);line-height:1.7;margin-bottom:12px;padding:10px 14px;background:var(--surface2);border-left:3px solid var(--accent);border-radius:0 6px 6px 0;">
+        <strong>比較の注意点：</strong>博物館研究（日本博物館協会）の登録館数は各年度末（翌年3月31日）基準。社会教育調査（文部科学省）は数年おきに実施され、基準日が異なる場合がある。同一年度でも数値に差が生じる可能性があり、直接比較の際は留意が必要か）。また博物館研究の「指定/相当」館は年度によって集計基準が異なる（平成24年度以前は「相当」として集計）。
+      </div>
+      <div class="legend">
+        <span><span class="legend-dot" style="background:#185FA5"></span>博物館研究 登録館（H17〜R6）</span>
+        <span><span class="legend-dot" style="background:#7F77DD"></span>博物館研究 指定/相当館（H17〜R6）</span>
+        <span><span class="legend-dot" style="background:#D4537E"></span>社会教育調査 登録博物館（調査年のみ）</span>
+        <span><span class="legend-dot" style="background:#1D9E75"></span>社会教育調査 相当・指定施設（調査年のみ）</span>
+        <span><span class="legend-dot" style="background:#EF9F27"></span>社会教育調査 総数（調査年のみ）</span>
+        <span><span class="legend-dot" style="background:#A32D2D"></span>博物館研究 登録＋指定/相当 合計（調査年のみ）</span>
+      </div>
+      <div class="controls-row">
+        <label class="toggle-lbl"><input type="checkbox" id="chk-survey" onchange="toggleLabels('survey')" checked>データラベルを表示</label>
+      </div>
+      <div style="position:relative;height:360px;"><canvas id="chartSurveyCompare" role="img" aria-label="博物館研究と社会教育調査の比較"></canvas></div>
+    </div>
+
+    <div class="analysis">
+      <h3>分析メモ（社会教育調査との比較）</h3>
+      <ul>
+        <li>同一年度の登録館数を比較すると、博物館研究が社会教育調査より常に多い（例：2024年 博研1,017館 vs 社教972館）。基準日のずれ（博研は翌年3月末）が影響している可能性か）。</li>
+        <li>社会教育調査ベースでも1971年（389館）からR6（1,346館）まで長期的な増加傾向が確認でき、方向性は両調査で一致している。</li>
+        <li>社会教育調査のR2024以降は「登録博物館」が増加（972館）し「相当・指定施設」が減少（374館）しており、登録手続きの変化が影響している可能性か）。</li>
+        <li>博物館研究の「指定/相当」館は平成24年度以前に集計基準が変更されており、時系列での単純比較には注意が必要か）。</li>
       </ul>
     </div>
   </div>
@@ -653,6 +687,81 @@
     </div>
   </div>
 
+  <!-- 企業倒産×閉館タブ -->
+  <div class="tab-panel" id="tab-tosan">
+    <div style="font-size:12px;color:var(--text2);margin-bottom:14px;padding:10px 14px;background:var(--surface);border:1px solid var(--border);border-radius:8px;">
+      出典：企業倒産件数 ／ 統計局（2005〜2024年度）
+    </div>
+    <div class="metrics" style="grid-template-columns:repeat(auto-fit,minmax(160px,1fr));">
+      <div class="metric"><div class="metric-label">倒産×閉館 全体 r</div><div class="metric-value" style="font-size:18px;">−0.01</div><div class="metric-sub">ほぼ無相関</div></div>
+      <div class="metric"><div class="metric-label">倒産×閉館 除外後 r</div><div class="metric-value" style="font-size:18px;">+0.21</div><div class="metric-sub">コロナ除外・弱い正相関</div></div>
+      <div class="metric"><div class="metric-label">倒産×減少合計 全体 r</div><div class="metric-value" style="font-size:18px;">+0.27</div><div class="metric-sub">弱い正相関</div></div>
+      <div class="metric"><div class="metric-label">倒産×減少合計 除外後 r</div><div class="metric-value c-blue" style="font-size:18px;">+0.52</div><div class="metric-sub">コロナ除外・中程度の正相関</div></div>
+    </div>
+
+    <div class="chart-card">
+      <div class="chart-title-row">
+        <div class="chart-title">企業倒産件数・閉館件数・減少合計の推移</div>
+        <button class="dl-btn" onclick="downloadChart('chartTosanTrend','企業倒産件数と閉館件数の推移')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> PNG</button>
+      </div>
+      <div class="legend">
+        <span><span class="legend-dot" style="background:#EF9F27;border-radius:50%"></span>企業倒産件数（左軸）</span>
+        <span><span class="legend-dot" style="background:rgba(163,45,45,0.75)"></span>閉館件数（右軸）</span>
+        <span><span class="legend-dot" style="background:rgba(163,45,45,0.3)"></span>減少合計（右軸）</span>
+      </div>
+      <div class="controls-row">
+        <label class="toggle-lbl"><input type="checkbox" id="chk-tosan" onchange="toggleLabels('tosan')" checked>データラベルを表示</label>
+      </div>
+      <div style="position:relative;height:300px;"><canvas id="chartTosanTrend" role="img"></canvas></div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(440px,1fr));gap:16px;margin-bottom:16px;">
+      <div class="chart-card" style="margin-bottom:0;">
+        <div class="chart-title-row">
+          <div class="chart-title">散布図① 倒産件数 × 閉館件数</div>
+          <button class="dl-btn" onclick="downloadChart('chartTosanS1','散布図_倒産件数×閉館件数')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> PNG</button>
+        </div>
+        <div class="legend">
+          <span><span class="legend-dot" style="background:rgba(163,45,45,0.65);border-radius:50%"></span>通常年</span>
+          <span><span class="legend-dot" style="background:rgba(130,130,130,0.4);border-radius:50%"></span>R2・R3除外</span>
+          <span><span class="legend-dot" style="background:#EF9F27;border-radius:2px"></span>全体近似（r=−0.01）</span>
+          <span><span class="legend-dot" style="background:#185FA5;border-radius:2px"></span>除外後近似（r=+0.21）</span>
+        </div>
+        <div style="position:relative;height:280px;"><canvas id="chartTosanS1" role="img"></canvas></div>
+        <div style="margin-top:10px;font-size:11px;color:var(--text2);line-height:1.6;padding:8px 10px;background:var(--surface2);border-radius:6px;">全体r=−0.01・除外後r=+0.21。企業倒産件数と閉館件数はほぼ無相関。コロナ禍を除くと弱い正相関が現れるが、直接的な連動は読み取りにくいか）。</div>
+      </div>
+      <div class="chart-card" style="margin-bottom:0;">
+        <div class="chart-title-row">
+          <div class="chart-title">散布図② 倒産件数 × 減少合計</div>
+          <button class="dl-btn" onclick="downloadChart('chartTosanS2','散布図_倒産件数×減少合計')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> PNG</button>
+        </div>
+        <div class="legend">
+          <span><span class="legend-dot" style="background:rgba(163,45,45,0.65);border-radius:50%"></span>通常年</span>
+          <span><span class="legend-dot" style="background:rgba(130,130,130,0.4);border-radius:50%"></span>R2・R3除外</span>
+          <span><span class="legend-dot" style="background:#EF9F27;border-radius:2px"></span>全体近似（r=+0.27）</span>
+          <span><span class="legend-dot" style="background:#185FA5;border-radius:2px"></span>除外後近似（r=+0.52）</span>
+        </div>
+        <div style="position:relative;height:280px;"><canvas id="chartTosanS2" role="img"></canvas></div>
+        <div style="margin-top:10px;font-size:11px;color:var(--text2);line-height:1.6;padding:8px 10px;background:var(--surface2);border-radius:6px;">
+          <p style="margin-bottom:6px;"><strong>全体r=+0.27・コロナ除外後r=+0.52（中程度の正相関）</strong></p>
+          <p style="margin-bottom:5px;"><strong>全体（R2・R3含む）の場合：</strong>近似線はやや右上がりだが傾きは緩い。R2（倒産7,163件なのに減少38件）・R3（倒産5,980件なのに減少56件）がコロナ給付金により倒産が抑制された特殊な2年間で、「倒産が少ないのに減少が多い」方向に引っ張り、全体の相関を弱めている。</p>
+          <p style="margin-bottom:5px;"><strong>コロナ除外後の場合：</strong>近似線の傾きが立ち上がり、「倒産が多い年ほど博物館の減少も多い」傾向が明確になる。特に2007〜2009年（リーマンショック前後）の点群が右上に固まっており、経済危機期に博物館の移管・廃止判断が増える流れが見えるか）。</p>
+          <p><strong>「閉館」より「減少合計」の方が相関が強い理由：</strong>減少合計には「除外」（登録抹消・移管・休館扱いへの変更）が含まれる。企業倒産による影響は突然の閉館より、財政難→指定管理更新断念→移管→登録抹消という段階的なプロセスを経ることが多く、「除外」の形で統計に現れやすいと考えられるか）。</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="analysis">
+      <h3>分析メモ</h3>
+      <ul>
+        <li><strong>閉館件数との相関は弱い</strong>（全体r=−0.01、除外後r=+0.21）。企業倒産が博物館閉館に直接結びつくとは言い切れないか）。</li>
+        <li><strong>減少合計との相関はコロナ除外後にr=+0.52と中程度</strong>。閉館だけでなく「除外（登録抹消・移管）」を含めると経済状況との連動が強まる傾向か）。</li>
+        <li>コロナ禍（R2・R3）は給付金等の影響で企業倒産件数が異常に低下し、博物館減少合計は逆に高かった特殊期間。除外後の分析がより実態を反映しているか）。</li>
+        <li>企業倒産が増加傾向にある近年（2023〜2024年度）の閉館件数の動向は引き続き注視が必要か）。</li>
+      </ul>
+    </div>
+  </div>
+
 </div>
 <footer>
   データ出典：博物館研究 H17〜R6 博物館園数関連統計・博物館館園数関連統計（日本博物館協会） ／ 路上博物館 サイレント閉館調査プロジェクト 参考資料
@@ -694,6 +803,10 @@
         <tr style="background:var(--surface2);">
           <td style="padding:8px 10px;color:var(--text2);vertical-align:top;">地図データ</td>
           <td style="padding:8px 10px;color:var(--text);line-height:1.6;">japanmap（MIT License）<br><span style="color:var(--text3);"><a href="https://github.com/SaitoTsutomu/japanmap" target="_blank" style="color:var(--accent);">github.com/SaitoTsutomu/japanmap</a></span></td>
+        </tr>
+        <tr>
+          <td style="padding:8px 10px;color:var(--text2);vertical-align:top;">企業倒産件数</td>
+          <td style="padding:8px 10px;color:var(--text);line-height:1.6;">企業倒産件数（2005〜2024年度・全国）<br><span style="color:var(--text3);">統計局</span></td>
         </tr>
       </table>
     </div>
@@ -956,7 +1069,7 @@ mk('chartNet',{
 
 // ===== タブ切替 =====
 function showTab(name){
-  const names=['total','type','flow','visitors','cpi','vreg','fiscal','pref'];
+  const names=['total','type','flow','visitors','cpi','vreg','fiscal','pref','tosan'];
   document.querySelectorAll('.tab-btn').forEach((b,i)=>b.classList.toggle('active',names[i]===name));
   document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
   document.getElementById('tab-'+name).classList.add('active');
@@ -968,7 +1081,7 @@ function showTab(name){
 // ===== データラベル切替 =====
 function toggleLabels(group){
   const show=document.getElementById('chk-'+group).checked;
-  const map={total:['chartTotal'],type:['chartType'],open:['chartOpen'],close:['chartClose'],net:['chartNet'],vtotal:['chartVTotal'],vtype:['chartVType'],vper:['chartVPer'],cpi:['chartCpiClose','chartCpiScatter'],vreg:['chartVreg1','chartVreg2','chartVreg3','chartVreg4'],fiscal:['chartFisc1','chartFisc2','chartFisc3','chartFisc4','chartFisc5','chartFiscS1','chartFiscS2','chartFiscS3','chartFiscS4','chartFiscS5']};
+  const map={total:['chartTotal','chartSurveyCompare'],type:['chartType'],open:['chartOpen'],close:['chartClose'],net:['chartNet'],vtotal:['chartVTotal'],vtype:['chartVType'],vper:['chartVPer'],cpi:['chartCpiClose','chartCpiScatter'],vreg:['chartVreg1','chartVreg2','chartVreg3','chartVreg4'],tosan:['chartTosanTrend','chartTosanS1','chartTosanS2'],fiscal:['chartFisc1','chartFisc2','chartFisc3','chartFisc4','chartFisc5','chartFiscS1','chartFiscS2','chartFiscS3','chartFiscS4','chartFiscS5']};
   (map[group]||[]).forEach(id=>{
     const c=charts[id];if(!c)return;
     c.data.datasets.forEach(ds=>{if(ds.datalabels)ds.datalabels.display=show;});
@@ -2016,6 +2129,181 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closeAbout();});
 document.getElementById('aboutModal').addEventListener('click',e=>{
   if(e.target===document.getElementById('aboutModal'))closeAbout();
 });
+
+// ===== 社会教育調査 vs 博物館研究（登録館）比較グラフ =====
+const SURVEY_YEARS   = [1971,1975,1978,1981,1984,1987,1990,1993,1996,1999,2002,2005,2008,2011,2015,2018,2021,2024];
+const SURVEY_TOTAL   = [389,409,493,578,676,737,799,861,985,1045,1120,1196,1248,1262,1256,1286,1305,1346];
+const SURVEY_REG     = [183,220,292,355,446,513,562,619,715,769,819,865,907,913,895,914,911,972];
+const SURVEY_APPROX  = [176,189,201,223,230,224,237,242,270,276,301,331,341,349,361,372,394,374];
+
+// 博物館研究 登録館・指定/相当館（H17年度〜R6年度）
+const HAKKEN_REG_YEARS  = [2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024];
+const HAKKEN_REG        = [893,903,905,909,912,911,920,917,920,924,926,927,930,936,940,944,943,947,967,1017];
+const HAKKEN_APPROX     = [334,353,357,362,359,363,371,380,388,396,405,411,414,420,420,431,430,437,429,404];
+
+mk('chartSurveyCompare', {
+  type: 'line',
+  data: {
+    labels: SURVEY_YEARS,
+    datasets: [
+      // 博物館研究 登録館（H17〜R6の調査年に対応する点のみ表示）
+      {
+        label: '博物館研究 登録館',
+        data: SURVEY_YEARS.map(y => {
+          const idx = HAKKEN_REG_YEARS.indexOf(y);
+          return idx >= 0 ? HAKKEN_REG[idx] : null;
+        }),
+        borderColor: '#185FA5', backgroundColor: 'rgba(24,95,165,0.07)',
+        fill: false, tension: 0.3, pointRadius: 5, pointBackgroundColor: '#185FA5',
+        borderWidth: 2.5, spanGaps: false,
+        datalabels: { display: true, color: '#185FA5', font: {size:10}, anchor: 'end', align: 'top',
+          formatter: v => v ? v.toLocaleString() : '' },
+      },
+      // 博物館研究 指定/相当館
+      {
+        label: '博物館研究 指定/相当館',
+        data: SURVEY_YEARS.map(y => {
+          const idx = HAKKEN_REG_YEARS.indexOf(y);
+          return idx >= 0 ? HAKKEN_APPROX[idx] : null;
+        }),
+        borderColor: '#7F77DD', backgroundColor: 'transparent',
+        fill: false, tension: 0.3, pointRadius: 5, pointBackgroundColor: '#7F77DD',
+        borderWidth: 2, spanGaps: false,
+        datalabels: { display: true, color: '#7F77DD', font: {size:10}, anchor: 'end', align: 'bottom',
+          formatter: v => v ? v.toLocaleString() : '' },
+      },
+      // 社会教育調査 登録博物館
+      {
+        label: '社会教育調査 登録博物館',
+        data: SURVEY_REG,
+        borderColor: '#D4537E', backgroundColor: 'transparent',
+        tension: 0.3, pointRadius: 5, pointBackgroundColor: '#D4537E',
+        borderWidth: 2, borderDash: [5,3],
+        datalabels: { display: true, color: '#D4537E', font: {size:10}, anchor: 'start', align: 'bottom',
+          formatter: v => v ? v.toLocaleString() : '' },
+      },
+      // 社会教育調査 相当・指定施設
+      {
+        label: '社会教育調査 相当・指定施設',
+        data: SURVEY_APPROX,
+        borderColor: '#1D9E75', backgroundColor: 'transparent',
+        tension: 0.3, pointRadius: 4, pointBackgroundColor: '#1D9E75',
+        borderWidth: 1.5, borderDash: [3,2],
+        datalabels: { display: false },
+      },
+      // 社会教育調査 総数
+      {
+        label: '社会教育調査 総数',
+        data: SURVEY_TOTAL,
+        borderColor: '#EF9F27', backgroundColor: 'transparent',
+        tension: 0.3, pointRadius: 4, pointBackgroundColor: '#EF9F27',
+        borderWidth: 1.5, borderDash: [6,3],
+        datalabels: { display: false },
+      },
+      // 博物館研究 登録＋指定/相当 合計
+      {
+        label: '博物館研究 登録＋指定/相当 合計',
+        data: SURVEY_YEARS.map(y => {
+          const idx = HAKKEN_REG_YEARS.indexOf(y);
+          return idx >= 0 ? HAKKEN_REG[idx] + HAKKEN_APPROX[idx] : null;
+        }),
+        borderColor: '#A32D2D', backgroundColor: 'transparent',
+        fill: false, tension: 0.3, pointRadius: 5, pointBackgroundColor: '#A32D2D',
+        borderWidth: 2.5, spanGaps: false,
+        datalabels: { display: true, color: '#A32D2D', font: {size:10}, anchor: 'end', align: 'top',
+          formatter: v => v ? v.toLocaleString() : '' },
+      },
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    plugins: {
+      legend: { display: false },
+      datalabels: {},
+      tooltip: {
+        callbacks: {
+          title: ctx => ctx[0].label + '年',
+          label: ctx => ' ' + ctx.dataset.label + ': ' + (ctx.parsed.y != null ? ctx.parsed.y.toLocaleString() + ' 館' : 'データなし'),
+        }
+      }
+    },
+    scales: {
+      x: { grid: { color: grid }, ticks: { ...tick, callback: v => SURVEY_YEARS[v] + '年' } },
+      y: { grid: { color: grid }, ticks: { ...tick, callback: v => v.toLocaleString() } }
+    },
+    layout: { padding: { top: 24 } }
+  }
+});
+
+// ===== 企業倒産×閉館 =====
+const TOSAN_YEARS  = [2005,2006,2007,2008,2009,2010,2011,2012,2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024];
+const TOSAN_DATA   = [13170,13337,14366,16146,14732,13065,12707,11719,10536,9543,8684,8381,8367,8110,8631,7163,5980,6880,9053,10144];
+const HEIKAN_DATA  = [25,19,36,40,31,25,26,33,24,26,22,30,36,25,34,29,45,18,40,34];
+const GENSHO_DATA  = [34,23,47,51,62,37,40,34,29,35,25,41,43,25,38,38,56,21,44,41];
+const TOSAN_YL     = ['H17','H18','H19','H20','H21','H22','H23','H24','H25','H26','H27','H28','H29','H30','R1','R2','R3','R4','R5','R6'];
+const TOSAN_EXCL   = new Set([2020,2021]);
+
+mk('chartTosanTrend', {
+  type: 'bar',
+  data: { labels: years, datasets: [
+    { label:'閉館件数', data:HEIKAN_DATA, backgroundColor:'rgba(163,45,45,0.75)', stack:'cl', order:2, yAxisID:'y',
+      datalabels:{display:true,color:'#fff',font:{size:10},formatter:v=>v>0?v:'',anchor:'center',align:'center'} },
+    { label:'減少合計（除外含む）', data:GENSHO_DATA.map((v,i)=>v-HEIKAN_DATA[i]), backgroundColor:'rgba(163,45,45,0.28)', stack:'cl', order:2, yAxisID:'y',
+      datalabels:{display:true,color:'#A32D2D',font:{size:9},formatter:v=>v>0?v:'',anchor:'end',align:'top'} },
+    { label:'企業倒産件数', data:TOSAN_DATA, type:'line',
+      borderColor:'#EF9F27', backgroundColor:'transparent',
+      pointRadius:3, pointBackgroundColor:'#EF9F27', borderWidth:2.5, tension:0.3,
+      yAxisID:'y2', order:1,
+      datalabels:{display:true,color:'#BA7517',font:{size:9},anchor:'end',align:'top',formatter:v=>v.toLocaleString()} },
+  ]},
+  options:{
+    responsive:true, maintainAspectRatio:false,
+    plugins:{legend:{display:false},datalabels:{}},
+    scales:{
+      x:{stacked:true,grid:{color:grid},ticks:tick},
+      y:{stacked:true,position:'left',grid:{color:grid},ticks:{...tick,callback:v=>v+' 件'},
+         title:{display:true,text:'閉館件数',color:'#9e9c97',font:{size:11}}},
+      y2:{position:'right',grid:{drawOnChartArea:false},ticks:{...tick,callback:v=>v.toLocaleString()},
+          title:{display:true,text:'企業倒産件数',color:'#9e9c97',font:{size:11}}},
+    },
+    layout:{padding:{top:22}}
+  }
+});
+
+function makeTosanScatter(id, yData, regAll, regExcl) {
+  const norm = TOSAN_YEARS.filter(y=>!TOSAN_EXCL.has(y)).map(y=>{
+    const i=TOSAN_YEARS.indexOf(y); return {x:TOSAN_DATA[i],y:yData[i],lbl:TOSAN_YL[i]};
+  });
+  const excl = TOSAN_YEARS.filter(y=>TOSAN_EXCL.has(y)).map(y=>{
+    const i=TOSAN_YEARS.indexOf(y); return {x:TOSAN_DATA[i],y:yData[i],lbl:TOSAN_YL[i]};
+  });
+  mk(id,{
+    type:'scatter',
+    data:{datasets:[
+      {label:'通常年',data:norm,backgroundColor:'rgba(163,45,45,0.65)',pointRadius:5,pointHoverRadius:7,
+        datalabels:{display:true,color:'#6b6860',font:{size:9},anchor:'end',align:'right',formatter:(v,ctx)=>norm[ctx.dataIndex].lbl}},
+      {label:'除外',data:excl,backgroundColor:'rgba(130,130,130,0.38)',pointRadius:5,borderColor:'rgba(130,130,130,0.6)',borderWidth:1.5,
+        datalabels:{display:true,color:'#9e9c97',font:{size:9},anchor:'end',align:'right',formatter:(v,ctx)=>excl[ctx.dataIndex].lbl}},
+      {label:'全体近似',data:regAll,type:'line',borderColor:'#EF9F27',backgroundColor:'transparent',borderWidth:2,borderDash:[5,3],pointRadius:0,datalabels:{display:false}},
+      {label:'除外後近似',data:regExcl,type:'line',borderColor:'#185FA5',backgroundColor:'transparent',borderWidth:2,borderDash:[4,2],pointRadius:0,datalabels:{display:false}},
+    ]},
+    options:{
+      responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{display:false},datalabels:{},
+        tooltip:{callbacks:{label:ctx=>`${ctx.raw.lbl||''}: (倒産${ctx.raw.x?.toLocaleString()}, ${ctx.raw.y}件)`}}},
+      scales:{
+        x:{grid:{color:grid},ticks:tick,title:{display:true,text:'企業倒産件数（件）',color:'#9e9c97',font:{size:11}}},
+        y:{grid:{color:grid},ticks:tick,title:{display:true,text:'件数',color:'#9e9c97',font:{size:11}}},
+      },
+      layout:{padding:{top:14,right:40}}
+    }
+  });
+}
+
+makeTosanScatter('chartTosanS1', HEIKAN_DATA,
+  [{x:5980,y:30.1},{x:16146,y:29.7}], [{x:6880,y:27.0},{x:16146,y:31.8}]);
+makeTosanScatter('chartTosanS2', GENSHO_DATA,
+  [{x:5980,y:33.6},{x:16146,y:43.9}], [{x:6880,y:29.1},{x:16146,y:47.5}]);
 </script>
 </body>
 </html>

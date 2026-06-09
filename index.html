@@ -541,8 +541,8 @@
       <div class="chart-title-row"><div class="chart-title">⓪ H17→R6 増減マップ（都道府県別）</div><button class="dl-btn" onclick="downloadSVGasPNG('japanMap','japan_map')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> PNG</button></div>
       <div style="font-size:12px;color:var(--text2);margin-bottom:10px;">増加ほど青、減少ほど赤で色分け。各都道府県にカーソルを当てると詳細が表示されます。</div>
       <div style="display:flex;align-items:flex-start;justify-content:center;gap:16px;flex-wrap:wrap;">
-        <div style="flex:1;min-width:300px;position:relative;">
-          <svg id="japanMap" viewBox="0 0 600 550" style="width:100%;max-width:640px;display:block;" xmlns="http://www.w3.org/2000/svg">
+        <div style="flex:1;min-width:300px;max-width:640px;position:relative;">
+          <svg id="japanMap" viewBox="0 0 600 550" style="width:100%;display:block;margin:0 auto;" xmlns="http://www.w3.org/2000/svg">
             <g id="mapPaths"></g>
             <g id="mapLabels"></g>
           </svg>

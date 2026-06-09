@@ -91,7 +91,7 @@
       <div class="metric"><div class="metric-label">R2 追加登録</div><div class="metric-value c-amber">+154</div><div class="metric-sub">登録基準変更による一括計上か</div></div>
     </div>
     <div class="chart-card">
-      <div class="chart-title-row"><div class="chart-title">博物館総数の推移</div><button class="dl-btn" onclick="downloadChart('chartTotal','total')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> PNG</button></div>
+      <div class="chart-title-row"><div class="chart-title">博物館総数の推移</div><button class="dl-btn" onclick="downloadChart('chartTotal','博物館総数の推移')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> PNG</button></div>
       <div class="controls-row">
         <label class="toggle-lbl"><input type="checkbox" id="chk-total" onchange="toggleLabels('total')" checked>データラベルを表示</label>
       </div>
@@ -110,7 +110,7 @@
   <!-- タブ2 -->
   <div class="tab-panel" id="tab-type">
     <div class="chart-card">
-      <div class="chart-title-row"><div class="chart-title">館種別 館数の推移</div><button class="dl-btn" onclick="downloadChart('chartType','type')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> PNG</button></div>
+      <div class="chart-title-row"><div class="chart-title">館種別 館数の推移</div><button class="dl-btn" onclick="downloadChart('chartType','館種別_館数の推移')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> PNG</button></div>
       <div class="controls-row">
         <div class="type-toggles" id="typeToggles">
           <button class="all-toggle-btn" id="allToggleBtn" onclick="toggleAllSeries()">すべてOFF</button>
@@ -149,7 +149,7 @@
     </div>
 
     <div class="chart-card">
-      <div class="chart-title-row"><div class="chart-title">新館・追加館の内訳（積み上げ棒）</div><button class="dl-btn" onclick="downloadChart('chartOpen','open')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> PNG</button></div>
+      <div class="chart-title-row"><div class="chart-title">新館・追加館の内訳（積み上げ棒）</div><button class="dl-btn" onclick="downloadChart('chartOpen','新館・追加館の内訳')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> PNG</button></div>
       <div class="legend">
         <span><span class="legend-dot" style="background:rgba(24,95,165,0.85)"></span>新館</span>
         <span><span class="legend-dot" style="background:rgba(24,95,165,0.32)"></span>追加館</span>
@@ -163,7 +163,7 @@
     </div>
 
     <div class="chart-card">
-      <div class="chart-title-row"><div class="chart-title">閉館・除外館の内訳（積み上げ棒）</div><button class="dl-btn" onclick="downloadChart('chartClose','close')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> PNG</button></div>
+      <div class="chart-title-row"><div class="chart-title">閉館・除外館の内訳（積み上げ棒）</div><button class="dl-btn" onclick="downloadChart('chartClose','閉館・除外館の内訳')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> PNG</button></div>
       <div class="legend">
         <span><span class="legend-dot" style="background:rgba(163,45,45,0.82)"></span>閉館</span>
         <span><span class="legend-dot" style="background:rgba(163,45,45,0.3)"></span>除外</span>
@@ -177,7 +177,7 @@
     </div>
 
     <div class="chart-card">
-      <div class="chart-title-row"><div class="chart-title">増減の推移（新規合計 / 減少合計 / 純増減）</div><button class="dl-btn" onclick="downloadChart('chartNet','net')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> PNG</button></div>
+      <div class="chart-title-row"><div class="chart-title">増減の推移（新規合計 / 減少合計 / 純増減）</div><button class="dl-btn" onclick="downloadChart('chartNet','増減の推移')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> PNG</button></div>
       <div class="legend">
         <span><span class="legend-dot" style="background:rgba(24,95,165,0.65)"></span>新規合計（開館）</span>
         <span><span class="legend-dot" style="background:rgba(163,45,45,0.65)"></span>減少合計（閉館＋除外）</span>
@@ -214,7 +214,7 @@
     </div>
 
     <div class="chart-card">
-      <div class="chart-title-row"><div class="chart-title">来館者数 総計の推移</div><button class="dl-btn" onclick="downloadChart('chartVTotal','vtotal')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> PNG</button></div>
+      <div class="chart-title-row"><div class="chart-title">来館者数 総計の推移</div><button class="dl-btn" onclick="downloadChart('chartVTotal','来館者数_総計の推移')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> PNG</button></div>
       <div class="legend">
         <span><span class="legend-dot" style="background:#EF9F27;border-radius:50%"></span>全体平均（1.479億人）</span>
         <span><span class="legend-dot" style="background:#D4537E;border-radius:50%"></span>コロナ禍除く平均（1.543億人）</span>
@@ -226,7 +226,7 @@
     </div>
 
     <div class="chart-card">
-      <div class="chart-title-row"><div class="chart-title">館種別 来館者数の推移</div><button class="dl-btn" onclick="downloadChart('chartVType','vtype')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> PNG</button></div>
+      <div class="chart-title-row"><div class="chart-title">館種別 来館者数の推移</div><button class="dl-btn" onclick="downloadChart('chartVType','館種別_来館者数の推移')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> PNG</button></div>
       <div class="controls-row">
         <div class="type-toggles" id="vTypeToggles">
           <button class="all-toggle-btn" id="vAllToggleBtn" onclick="toggleAllVSeries()">すべてOFF</button>
@@ -237,7 +237,7 @@
     </div>
 
     <div class="chart-card">
-      <div class="chart-title-row"><div class="chart-title">1館あたりの平均来館者数の推移</div><button class="dl-btn" onclick="downloadChart('chartVPer','vper')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> PNG</button></div>
+      <div class="chart-title-row"><div class="chart-title">1館あたりの平均来館者数の推移</div><button class="dl-btn" onclick="downloadChart('chartVPer','1館あたりの平均来館者数の推移')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> PNG</button></div>
       <div class="legend">
         <span><span class="legend-dot" style="background:#185FA5;border-radius:50%"></span>1館あたり来館者数</span>
         <span><span class="legend-dot" style="background:#EF9F27;border-radius:50%"></span>全体平均（35,244人）</span>
@@ -272,7 +272,7 @@
     </div>
 
     <div class="chart-card">
-      <div class="chart-title-row"><div class="chart-title">物価指数（CPI）と閉館件数・減少合計の推移</div><button class="dl-btn" onclick="downloadChart('chartCpiClose','cpiclose')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> PNG</button></div>
+      <div class="chart-title-row"><div class="chart-title">物価指数（CPI）と閉館件数・減少合計の推移</div><button class="dl-btn" onclick="downloadChart('chartCpiClose','物価指数(CPI)と閉館件数の推移')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> PNG</button></div>
       <div class="legend">
         <span><span class="legend-dot" style="background:rgba(163,45,45,0.75)"></span>閉館件数（左軸）</span>
         <span><span class="legend-dot" style="background:rgba(163,45,45,0.3)"></span>減少合計（左軸）</span>
@@ -285,7 +285,7 @@
     </div>
 
     <div class="chart-card">
-      <div class="chart-title-row"><div class="chart-title">散布図：CPI × 閉館件数</div><button class="dl-btn" onclick="downloadChart('chartCpiScatter','cpiscatter')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> PNG</button></div>
+      <div class="chart-title-row"><div class="chart-title">散布図：CPI × 閉館件数</div><button class="dl-btn" onclick="downloadChart('chartCpiScatter','散布図_CPI×閉館件数')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> PNG</button></div>
       <div class="legend">
         <span><span class="legend-dot" style="background:rgba(163,45,45,0.65);border-radius:50%"></span>各年（H17〜R6）</span>
         <span><span class="legend-dot" style="background:rgba(100,100,100,0.4);border-radius:50%"></span>R2・R3（除外）</span>
@@ -327,7 +327,7 @@
 
       <!-- 散布図1: CPI × 来館者数 -->
       <div class="chart-card" style="margin-bottom:0;">
-        <div class="chart-title-row"><div class="chart-title">① CPI × 来館者数（総計）</div><button class="dl-btn" onclick="downloadChart('chartVreg1','vreg1')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> PNG</button></div>
+        <div class="chart-title-row"><div class="chart-title">① CPI × 来館者数（総計）</div><button class="dl-btn" onclick="downloadChart('chartVreg1','①CPI×来館者数(総計)')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> PNG</button></div>
         <div class="legend">
           <span><span class="legend-dot" style="background:rgba(24,95,165,0.65);border-radius:50%"></span>通常年</span>
           <span><span class="legend-dot" style="background:rgba(130,130,130,0.4);border-radius:50%"></span>R2・R3（除外）</span>
@@ -340,7 +340,7 @@
 
       <!-- 散布図2: CPI × 1館あたり -->
       <div class="chart-card" style="margin-bottom:0;">
-        <div class="chart-title-row"><div class="chart-title">② CPI × 1館あたり来館者数</div><button class="dl-btn" onclick="downloadChart('chartVreg2','vreg2')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> PNG</button></div>
+        <div class="chart-title-row"><div class="chart-title">② CPI × 1館あたり来館者数</div><button class="dl-btn" onclick="downloadChart('chartVreg2','②CPI×1館あたり来館者数')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> PNG</button></div>
         <div class="legend">
           <span><span class="legend-dot" style="background:rgba(24,95,165,0.65);border-radius:50%"></span>通常年</span>
           <span><span class="legend-dot" style="background:rgba(130,130,130,0.4);border-radius:50%"></span>R2・R3（除外）</span>
@@ -353,7 +353,7 @@
 
       <!-- 散布図3: 館数 × 来館者数 -->
       <div class="chart-card" style="margin-bottom:0;">
-        <div class="chart-title-row"><div class="chart-title">③ 館数 × 来館者数（総計）</div><button class="dl-btn" onclick="downloadChart('chartVreg3','vreg3')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> PNG</button></div>
+        <div class="chart-title-row"><div class="chart-title">③ 館数 × 来館者数（総計）</div><button class="dl-btn" onclick="downloadChart('chartVreg3','③館数×来館者数(総計)')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> PNG</button></div>
         <div class="legend">
           <span><span class="legend-dot" style="background:rgba(30,158,117,0.65);border-radius:50%"></span>通常年</span>
           <span><span class="legend-dot" style="background:rgba(130,130,130,0.4);border-radius:50%"></span>R2・R3（除外）</span>
@@ -366,7 +366,7 @@
 
       <!-- 散布図4: 閉館件数 × 来館者数 -->
       <div class="chart-card" style="margin-bottom:0;">
-        <div class="chart-title-row"><div class="chart-title">④ 閉館件数 × 来館者数（総計）</div><button class="dl-btn" onclick="downloadChart('chartVreg4','vreg4')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> PNG</button></div>
+        <div class="chart-title-row"><div class="chart-title">④ 閉館件数 × 来館者数（総計）</div><button class="dl-btn" onclick="downloadChart('chartVreg4','④閉館件数×来館者数(総計)')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> PNG</button></div>
         <div class="legend">
           <span><span class="legend-dot" style="background:rgba(163,45,45,0.65);border-radius:50%"></span>通常年</span>
           <span><span class="legend-dot" style="background:rgba(130,130,130,0.4);border-radius:50%"></span>R2・R3（除外）</span>
@@ -407,7 +407,7 @@
     <!-- 推移グラフ × 5 -->
     <div id="fiscTrendSection">
       <div class="chart-card">
-        <div class="chart-title-row"><div class="chart-title">① 財政力指数（全国平均）と閉館件数の推移</div><button class="dl-btn" onclick="downloadChart('chartFisc1','fisc1')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> PNG</button></div>
+        <div class="chart-title-row"><div class="chart-title">① 財政力指数（全国平均）と閉館件数の推移</div><button class="dl-btn" onclick="downloadChart('chartFisc1','①財政力指数と閉館件数の推移')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> PNG</button></div>
         <div style="font-size:12px;color:var(--text2);line-height:1.65;margin-bottom:10px;padding:8px 12px;background:var(--surface2);border-left:3px solid var(--accent);border-radius:0 6px 6px 0;">自治体が地方税収入のみで標準的な行政サービスをどれだけ賄えるかを示す指標。1.0を超えると交付税不交付団体（財政的に自立）、低いほど国からの交付税依存度が高い。</div>
         <div class="legend">
           <span><span class="legend-dot" style="background:rgba(24,95,165,0.65)"></span>閉館件数（左軸）</span>
@@ -417,7 +417,7 @@
         <div style="position:relative;height:280px;"><canvas id="chartFisc1"></canvas></div>
       </div>
       <div class="chart-card">
-        <div class="chart-title-row"><div class="chart-title">② 経常収支比率（全国平均）と閉館件数の推移</div><button class="dl-btn" onclick="downloadChart('chartFisc2','fisc2')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> PNG</button></div>
+        <div class="chart-title-row"><div class="chart-title">② 経常収支比率（全国平均）と閉館件数の推移</div><button class="dl-btn" onclick="downloadChart('chartFisc2','②経常収支比率と閉館件数の推移')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> PNG</button></div>
         <div style="font-size:12px;color:var(--text2);line-height:1.65;margin-bottom:10px;padding:8px 12px;background:var(--surface2);border-left:3px solid var(--accent);border-radius:0 6px 6px 0;">人件費・扶助費・公債費など毎年固定的にかかる経常的経費が、税収など経常的な収入に占める割合。高いほど財政が硬直化しており、新規事業や施設投資に回せる余裕が少ない。</div>
         <div class="legend">
           <span><span class="legend-dot" style="background:rgba(24,95,165,0.65)"></span>閉館件数（左軸）</span>
@@ -426,7 +426,7 @@
         <div style="position:relative;height:280px;"><canvas id="chartFisc2"></canvas></div>
       </div>
       <div class="chart-card">
-        <div class="chart-title-row"><div class="chart-title">③ 実質公債費比率（全国平均）と閉館件数の推移</div><button class="dl-btn" onclick="downloadChart('chartFisc3','fisc3')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> PNG</button></div>
+        <div class="chart-title-row"><div class="chart-title">③ 実質公債費比率（全国平均）と閉館件数の推移</div><button class="dl-btn" onclick="downloadChart('chartFisc3','③実質公債費比率と閉館件数の推移')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> PNG</button></div>
         <div style="font-size:12px;color:var(--text2);line-height:1.65;margin-bottom:10px;padding:8px 12px;background:var(--surface2);border-left:3px solid var(--accent);border-radius:0 6px 6px 0;">地方債（借金）の返済額が標準的な収入規模に占める割合。高いほど借金返済の負担が重く、18%以上で起債に制限がかかる。近年は全国的に低下傾向にある。</div>
         <div class="legend">
           <span><span class="legend-dot" style="background:rgba(24,95,165,0.65)"></span>閉館件数（左軸）</span>
@@ -435,7 +435,7 @@
         <div style="position:relative;height:280px;"><canvas id="chartFisc3"></canvas></div>
       </div>
       <div class="chart-card">
-        <div class="chart-title-row"><div class="chart-title">④ 将来負担比率（全国平均）と閉館件数の推移</div><button class="dl-btn" onclick="downloadChart('chartFisc4','fisc4')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> PNG</button></div>
+        <div class="chart-title-row"><div class="chart-title">④ 将来負担比率（全国平均）と閉館件数の推移</div><button class="dl-btn" onclick="downloadChart('chartFisc4','④将来負担比率と閉館件数の推移')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> PNG</button></div>
         <div style="font-size:12px;color:var(--text2);line-height:1.65;margin-bottom:10px;padding:8px 12px;background:var(--surface2);border-left:3px solid var(--accent);border-radius:0 6px 6px 0;">地方債残高・債務負担行為など将来的に返済が必要な負担の総額が、標準収入に占める割合。現時点の返済額ではなく「将来どれだけ返済が必要か」を示す中長期の財政健全度指標。H20（2008年）から公表。</div>
         <div class="legend">
           <span><span class="legend-dot" style="background:rgba(24,95,165,0.65)"></span>閉館件数（左軸）</span>
@@ -444,7 +444,7 @@
         <div style="position:relative;height:280px;"><canvas id="chartFisc4"></canvas></div>
       </div>
       <div class="chart-card">
-        <div class="chart-title-row"><div class="chart-title">⑤ ラスパイレス指数（全国平均）と閉館件数の推移</div><button class="dl-btn" onclick="downloadChart('chartFisc5','fisc5')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> PNG</button></div>
+        <div class="chart-title-row"><div class="chart-title">⑤ ラスパイレス指数（全国平均）と閉館件数の推移</div><button class="dl-btn" onclick="downloadChart('chartFisc5','⑤ラスパイレス指数と閉館件数の推移')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> PNG</button></div>
         <div style="font-size:12px;color:var(--text2);line-height:1.65;margin-bottom:10px;padding:8px 12px;background:var(--surface2);border-left:3px solid var(--accent);border-radius:0 6px 6px 0;">国家公務員の給与水準を100とした場合の、地方公務員の給与水準を示す指数。100を超えると国より高く、下回ると低い。自治体の人件費水準の代理変数として用いられる。H24〜25の異常値（107台）は東日本大震災復興財源確保のための国家公務員給与削減特例が影響。</div>
         <div class="legend">
           <span><span class="legend-dot" style="background:rgba(24,95,165,0.65)"></span>閉館件数（左軸）</span>
@@ -457,7 +457,7 @@
     <!-- 散布図 × 5 (2列グリッド) -->
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(440px,1fr));gap:16px;margin-bottom:16px;margin-top:16px;">
       <div class="chart-card" style="margin-bottom:0;">
-        <div class="chart-title-row"><div class="chart-title">散布図① 財政力指数 × 閉館件数</div><button class="dl-btn" onclick="downloadChart('chartFiscS1','fiscs1')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> PNG</button></div>
+        <div class="chart-title-row"><div class="chart-title">散布図① 財政力指数 × 閉館件数</div><button class="dl-btn" onclick="downloadChart('chartFiscS1','散布図①財政力指数×閉館件数')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> PNG</button></div>
         <div class="legend">
           <span><span class="legend-dot" style="background:rgba(24,95,165,0.65);border-radius:50%"></span>通常年</span>
           <span><span class="legend-dot" style="background:rgba(130,130,130,0.4);border-radius:50%"></span>R2・R3除外</span>
@@ -468,7 +468,7 @@
         <div style="margin-top:8px;font-size:11px;color:var(--text2);line-height:1.6;padding:8px 10px;background:var(--surface2);border-radius:6px;">全体r=+0.41・除外後r=+0.45。<strong>5指標中最も強い正相関。</strong>財政力が高い（豊かな）自治体ほど閉館が多い傾向か）。好況期に老朽館の更新・統廃合が進む可能性。</div>
       </div>
       <div class="chart-card" style="margin-bottom:0;">
-        <div class="chart-title-row"><div class="chart-title">散布図② 経常収支比率 × 閉館件数</div><button class="dl-btn" onclick="downloadChart('chartFiscS2','fiscs2')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> PNG</button></div>
+        <div class="chart-title-row"><div class="chart-title">散布図② 経常収支比率 × 閉館件数</div><button class="dl-btn" onclick="downloadChart('chartFiscS2','散布図②経常収支比率×閉館件数')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> PNG</button></div>
         <div class="legend">
           <span><span class="legend-dot" style="background:rgba(212,83,126,0.65);border-radius:50%"></span>通常年</span>
           <span><span class="legend-dot" style="background:rgba(130,130,130,0.4);border-radius:50%"></span>R2・R3除外</span>
@@ -479,7 +479,7 @@
         <div style="margin-top:8px;font-size:11px;color:var(--text2);line-height:1.6;padding:8px 10px;background:var(--surface2);border-radius:6px;">全体r=−0.09→除外後r=+0.46と<strong>符号が逆転。</strong>コロナ禍（R2: 経常収支比率が大幅低下）が傾向を歪めている。通常期は「収支が硬直するほど閉館が増える」傾向が示唆されるか）。</div>
       </div>
       <div class="chart-card" style="margin-bottom:0;">
-        <div class="chart-title-row"><div class="chart-title">散布図③ 実質公債費比率 × 閉館件数</div><button class="dl-btn" onclick="downloadChart('chartFiscS3','fiscs3')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> PNG</button></div>
+        <div class="chart-title-row"><div class="chart-title">散布図③ 実質公債費比率 × 閉館件数</div><button class="dl-btn" onclick="downloadChart('chartFiscS3','散布図③実質公債費比率×閉館件数')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> PNG</button></div>
         <div class="legend">
           <span><span class="legend-dot" style="background:rgba(29,158,117,0.65);border-radius:50%"></span>通常年</span>
           <span><span class="legend-dot" style="background:rgba(130,130,130,0.4);border-radius:50%"></span>R2・R3除外</span>
@@ -490,7 +490,7 @@
         <div style="margin-top:8px;font-size:11px;color:var(--text2);line-height:1.6;padding:8px 10px;background:var(--surface2);border-radius:6px;">全体r=−0.34・除外後r=−0.23。<strong>弱い負相関が継続。</strong>公債費比率が高い（借金負担が重い）年ほど閉館が少ない傾向。財政が逼迫しても閉館の意思決定には至りにくいことを示唆するか）。</div>
       </div>
       <div class="chart-card" style="margin-bottom:0;">
-        <div class="chart-title-row"><div class="chart-title">散布図④ 将来負担比率 × 閉館件数</div><button class="dl-btn" onclick="downloadChart('chartFiscS4','fiscs4')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> PNG</button></div>
+        <div class="chart-title-row"><div class="chart-title">散布図④ 将来負担比率 × 閉館件数</div><button class="dl-btn" onclick="downloadChart('chartFiscS4','散布図④将来負担比率×閉館件数')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> PNG</button></div>
         <div class="legend">
           <span><span class="legend-dot" style="background:rgba(239,159,39,0.65);border-radius:50%"></span>通常年</span>
           <span><span class="legend-dot" style="background:rgba(130,130,130,0.4);border-radius:50%"></span>R2・R3除外</span>
@@ -501,7 +501,7 @@
         <div style="margin-top:8px;font-size:11px;color:var(--text2);line-height:1.6;padding:8px 10px;background:var(--surface2);border-radius:6px;">全体r=−0.07・除外後r=+0.10。<strong>ほぼ無相関。</strong>将来負担比率はH20〜（2008〜）からしか取得できないためサンプル数も限られる。長期的な財政見通しと閉館の関連は読み取りにくいか）。</div>
       </div>
       <div class="chart-card" style="margin-bottom:0;">
-        <div class="chart-title-row"><div class="chart-title">散布図⑤ ラスパイレス指数 × 閉館件数</div><button class="dl-btn" onclick="downloadChart('chartFiscS5','fiscs5')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> PNG</button></div>
+        <div class="chart-title-row"><div class="chart-title">散布図⑤ ラスパイレス指数 × 閉館件数</div><button class="dl-btn" onclick="downloadChart('chartFiscS5','散布図⑤ラスパイレス指数×閉館件数')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> PNG</button></div>
         <div class="legend">
           <span><span class="legend-dot" style="background:rgba(127,119,221,0.65);border-radius:50%"></span>通常年</span>
           <span><span class="legend-dot" style="background:rgba(130,130,130,0.4);border-radius:50%"></span>R2・R3除外</span>
@@ -538,7 +538,7 @@
 
     <!-- ⓪ 地図：H17→R6 増減コロプレス -->
     <div class="chart-card">
-      <div class="chart-title-row"><div class="chart-title">⓪ H17→R6 増減マップ（都道府県別）</div><button class="dl-btn" onclick="downloadSVGasPNG('japanMap','japan_map')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> PNG</button></div>
+      <div class="chart-title-row"><div class="chart-title">⓪ H17→R6 増減マップ（都道府県別）</div><button class="dl-btn" onclick="downloadSVGasPNG('japanMap','⓪H17→R6増減マップ(都道府県別)')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> PNG</button></div>
       <div style="font-size:12px;color:var(--text2);margin-bottom:10px;">増加ほど青、減少ほど赤で色分け。各都道府県にカーソルを当てると詳細が表示されます。</div>
       <div style="display:flex;align-items:flex-start;justify-content:center;gap:16px;flex-wrap:wrap;">
         <div style="flex:1;min-width:300px;max-width:640px;position:relative;">
@@ -565,19 +565,19 @@
 
     <!-- ① H17→R6 増減ランキング -->
     <div class="chart-card">
-      <div class="chart-title-row"><div class="chart-title">① H17→R6 増減数ランキング（全47都道府県）</div><button class="dl-btn" onclick="downloadChart('chartPrefRank','prefrank')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> PNG</button></div>
+      <div class="chart-title-row"><div class="chart-title">① H17→R6 増減数ランキング（全47都道府県）</div><button class="dl-btn" onclick="downloadChart('chartPrefRank','①H17→R6増減数ランキング(全47都道府県)')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> PNG</button></div>
       <div style="position:relative;height:900px;"><canvas id="chartPrefRank" role="img" aria-label="都道府県別増減ランキング"></canvas></div>
     </div>
 
     <!-- ② R6 館数ランキング -->
     <div class="chart-card">
-      <div class="chart-title-row"><div class="chart-title-row"><div class="chart-title">② R6 館数ランキング（全47都道府県）</div><button class="dl-btn" onclick="downloadChart('chartPrefR6','prefr6')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> PNG</button></div><button class="dl-btn" onclick="downloadChart('chartPrefR6','prefr6')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> PNG</button></div>
+      <div class="chart-title-row"><div class="chart-title-row"><div class="chart-title">② R6 館数ランキング（全47都道府県）</div><button class="dl-btn" onclick="downloadChart('chartPrefR6','②R6館数ランキング(全47都道府県)')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> PNG</button></div><button class="dl-btn" onclick="downloadChart('chartPrefR6','②R6館数ランキング(全47都道府県)')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> PNG</button></div>
       <div style="position:relative;height:900px;"><canvas id="chartPrefR6" role="img" aria-label="R6館数ランキング"></canvas></div>
     </div>
 
     <!-- ③ 地域別 推移折れ線（地域合計） -->
     <div class="chart-card">
-      <div class="chart-title-row"><div class="chart-title">③ 地方別 館数合計の推移</div><button class="dl-btn" onclick="downloadChart('chartPrefRegion','prefregion')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> PNG</button></div>
+      <div class="chart-title-row"><div class="chart-title">③ 地方別 館数合計の推移</div><button class="dl-btn" onclick="downloadChart('chartPrefRegion','③地方別館数合計の推移')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> PNG</button></div>
       <div class="legend" id="regionLegend"></div>
       <div class="controls-row">
         <div class="type-toggles" id="regionToggles">
@@ -589,7 +589,7 @@
 
     <!-- ④ 個別都道府県 推移 -->
     <div class="chart-card">
-      <div class="chart-title-row"><div class="chart-title">④ 都道府県別 館数推移（選択表示）</div><button class="dl-btn" onclick="downloadChart('chartPrefLine','prefline')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> PNG</button></div>
+      <div class="chart-title-row"><div class="chart-title">④ 都道府県別 館数推移（選択表示）</div><button class="dl-btn" onclick="downloadChart('chartPrefLine','④都道府県別館数推移')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> PNG</button></div>
       <div class="controls-row" style="flex-wrap:wrap;gap:6px;">
         <div class="type-toggles" id="prefToggles" style="flex-wrap:wrap;">
           <button class="all-toggle-btn" id="prefAllBtn" onclick="toggleAllPref()">すべてOFF</button>
@@ -1403,6 +1403,27 @@ const REGION_COLORS = {"北海道":"#185FA5","東北":"#3B6D11","関東":"#D4537
 // ① 増減ランキング（横棒）
 const rankData = PREF_DATA.map(p=>({name:p.name, delta:p.vals[19]-p.vals[0]}))
   .sort((a,b)=>b.delta-a.delta);
+// 交互の横縞プラグイン（増減ランキング用）
+const rankStripePlugin = {
+  id: 'rankStripePlugin',
+  beforeDraw(chart) {
+    if(chart.canvas.id !== 'chartPrefRank') return;
+    const {ctx, chartArea, scales} = chart;
+    if(!chartArea) return;
+    const yScale = scales.y;
+    const n = chart.data.labels.length;
+    ctx.save();
+    for(let i = 0; i < n; i++) {
+      const yTop    = yScale.getPixelForValue(i - 0.5);
+      const yBottom = yScale.getPixelForValue(i + 0.5);
+      ctx.fillStyle = i % 2 === 0 ? 'rgba(0,0,0,0.04)' : 'rgba(0,0,0,0.0)';
+      ctx.fillRect(chartArea.left, yTop, chartArea.width, yBottom - yTop);
+    }
+    ctx.restore();
+  }
+};
+Chart.register(rankStripePlugin);
+
 mk('chartPrefRank',{
   type:'bar',
   data:{
@@ -1419,7 +1440,22 @@ mk('chartPrefRank',{
   },
   options:{
     indexAxis:'y', responsive:true, maintainAspectRatio:false,
-    plugins:{legend:{display:false},datalabels:{}},
+    plugins:{
+      legend:{display:false},
+      datalabels:{},
+      tooltip:{
+        callbacks:{
+          title: ctx => ctx[0].label,
+          label: ctx => {
+            const v = ctx.parsed.x;
+            return '増減: ' + (v > 0 ? '+' : '') + v + ' 館';
+          }
+        },
+        displayColors: false,
+        bodyFont: {size:13},
+        titleFont: {size:13, weight:'bold'},
+      }
+    },
     scales:{
       x:{grid:{color:'transparent'},ticks:tick,title:{display:true,text:'増減数（館）',color:'#9e9c97',font:{size:11}}},
       y:{grid:{color:'transparent'},ticks:{color:'#6b6860',font:{size:10}}},
@@ -1770,10 +1806,15 @@ function setMapMode(mode) {
 // ※ showTab は下記の元定義に統合済み
 
 // ===== PNG ダウンロード =====
-function downloadChart(canvasId, filename) {
+function makeFilename(title) {
+  // ファイル名に使えない文字を除去してmuseum_プレフィクスを付与
+  const safe = title.replace(/[\\/:*?"<>|]/g, '').replace(/\s+/g, '_').trim();
+  return 'museum_' + safe;
+}
+
+function downloadChart(canvasId, title) {
   const canvas = document.getElementById(canvasId);
   if (!canvas) return;
-  // 白背景で合成
   const out = document.createElement('canvas');
   out.width  = canvas.width;
   out.height = canvas.height;
@@ -1783,11 +1824,11 @@ function downloadChart(canvasId, filename) {
   ctx.drawImage(canvas, 0, 0);
   const a = document.createElement('a');
   a.href = out.toDataURL('image/png');
-  a.download = 'museum_' + filename + '.png';
+  a.download = makeFilename(title) + '.png';
   a.click();
 }
 
-function downloadSVGasPNG(svgId, filename) {
+function downloadSVGasPNG(svgId, title) {
   const svg = document.getElementById(svgId);
   if (!svg) return;
   const svgData = new XMLSerializer().serializeToString(svg);
@@ -1808,7 +1849,7 @@ function downloadSVGasPNG(svgId, filename) {
     URL.revokeObjectURL(url);
     const a = document.createElement('a');
     a.href = canvas.toDataURL('image/png');
-    a.download = 'museum_' + filename + '.png';
+    a.download = makeFilename(title) + '.png';
     a.click();
   };
   img.src = url;

@@ -610,7 +610,59 @@
   </div>
 
 </div>
-<footer>データ出典：博物館研究 H17〜R6 博物館園数関連統計・博物館館園数関連統計（日本博物館協会） ／ 路上博物館 サイレント閉館調査プロジェクト 参考資料</footer>
+<footer>
+  データ出典：博物館研究 H17〜R6 博物館園数関連統計・博物館館園数関連統計（日本博物館協会） ／ 路上博物館 サイレント閉館調査プロジェクト 参考資料
+  <span style="margin:0 8px;opacity:0.4;">|</span>
+  <a href="#" onclick="openAbout();return false;" style="color:var(--accent);text-decoration:none;font-size:11px;">About This</a>
+</footer>
+
+<!-- About モーダル -->
+<div id="aboutModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:1000;align-items:center;justify-content:center;">
+  <div style="background:var(--surface);border-radius:14px;padding:32px;max-width:640px;width:90%;max-height:85vh;overflow-y:auto;position:relative;box-shadow:0 20px 60px rgba(0,0,0,0.3);">
+    <button onclick="closeAbout()" style="position:absolute;top:16px;right:16px;background:transparent;border:none;cursor:pointer;font-size:20px;color:var(--text2);line-height:1;">✕</button>
+    <h2 style="font-size:16px;font-weight:600;margin-bottom:20px;color:var(--text);">About This Dashboard</h2>
+
+    <!-- 免責事項 -->
+    <div style="background:#fff8e1;border:1px solid #f0c040;border-radius:8px;padding:16px 18px;margin-bottom:20px;">
+      <div style="display:flex;align-items:center;gap:7px;margin-bottom:8px;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#BA7517" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <span style="font-size:13px;font-weight:600;color:#7a5000;">免責事項</span>
+      </div>
+      <p style="font-size:12px;color:#5a3c00;line-height:1.8;">本データは各種資料から引用して作成しています。引用時のデータの正確性は未検証のため、利用にあたっては注意が必要です。本ページのデータを利用して発生したいかなる損害も作成者及び管理者は責任を負いません。</p>
+    </div>
+
+    <!-- データ出典 -->
+    <div style="margin-bottom:20px;">
+      <div style="font-size:12px;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px;">データ出典</div>
+      <table style="width:100%;border-collapse:collapse;font-size:12px;">
+        <tr style="border-bottom:1px solid var(--border);">
+          <td style="padding:8px 10px;color:var(--text2);vertical-align:top;width:40%;">館数・来館者数推移</td>
+          <td style="padding:8px 10px;color:var(--text);line-height:1.6;">博物館研究 H17〜R6 博物館園数関連統計・博物館館園数関連統計<br><span style="color:var(--text3);">一般社団法人 日本博物館協会</span></td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--border);background:var(--surface2);">
+          <td style="padding:8px 10px;color:var(--text2);vertical-align:top;">物価指数（CPI）</td>
+          <td style="padding:8px 10px;color:var(--text);line-height:1.6;">World Economic Outlook Database<br><span style="color:var(--text3);">IMF／ <a href="https://data.imf.org/en/datasets/IMF.RES:WEO" target="_blank" style="color:var(--accent);">data.imf.org</a></span></td>
+        </tr>
+        <tr style="border-bottom:1px solid var(--border);">
+          <td style="padding:8px 10px;color:var(--text2);vertical-align:top;">財政指標</td>
+          <td style="padding:8px 10px;color:var(--text);line-height:1.6;">地方公共団体の主要財政指標<br><span style="color:var(--text3);">総務省</span></td>
+        </tr>
+        <tr style="background:var(--surface2);">
+          <td style="padding:8px 10px;color:var(--text2);vertical-align:top;">地図データ</td>
+          <td style="padding:8px 10px;color:var(--text);line-height:1.6;">japanmap（MIT License）<br><span style="color:var(--text3);"><a href="https://github.com/SaitoTsutomu/japanmap" target="_blank" style="color:var(--accent);">github.com/SaitoTsutomu/japanmap</a></span></td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- 作成者 -->
+    <div style="padding-top:16px;border-top:1px solid var(--border);font-size:12px;color:var(--text2);line-height:2.0;">
+      <div><span style="color:var(--text);font-weight:600;">作成・管理</span>　一般社団法人 路上博物館 サイレント閉館調査プロジェクト</div>
+      <div><span style="color:var(--text);font-weight:600;">担当理事</span>　齋藤 和輝</div>
+      <div><span style="color:var(--text);font-weight:600;">お問い合わせ</span>　<a href="https://rojohaku.com" target="_blank" style="color:var(--accent);">https://rojohaku.com</a></div>
+      <div style="margin-top:8px;font-size:11px;color:var(--text3);">本ダッシュボードは博物館の動態把握と政策的議論の参考資料として作成されたものです。二次利用の際は出典の明記をお願いします。</div>
+    </div>
+  </div>
+</div>
 
 <script>
 Chart.register(ChartDataLabels);
@@ -1759,6 +1811,22 @@ function downloadSVGasPNG(svgId, filename) {
   };
   img.src = url;
 }
+
+// ===== About モーダル =====
+function openAbout(){
+  const m=document.getElementById('aboutModal');
+  m.style.display='flex';
+  document.body.style.overflow='hidden';
+}
+function closeAbout(){
+  const m=document.getElementById('aboutModal');
+  m.style.display='none';
+  document.body.style.overflow='';
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeAbout();});
+document.getElementById('aboutModal').addEventListener('click',e=>{
+  if(e.target===document.getElementById('aboutModal'))closeAbout();
+});
 </script>
 </body>
 </html>

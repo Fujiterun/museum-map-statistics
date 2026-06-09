@@ -60,6 +60,50 @@
 </style>
 </head>
 <body>
+
+<!-- パスワード画面 -->
+<div id="pwScreen" style="display:flex;position:fixed;inset:0;background:#f5f4f0;z-index:9999;align-items:center;justify-content:center;">
+  <div style="background:#fff;border:1px solid rgba(0,0,0,0.1);border-radius:14px;padding:40px 48px;max-width:380px;width:90%;box-shadow:0 8px 40px rgba(0,0,0,0.1);text-align:center;">
+    <div style="font-size:22px;font-weight:600;color:#1a1917;margin-bottom:8px;">博物館統計ダッシュボード</div>
+    <div style="font-size:13px;color:#6b6860;margin-bottom:28px;">パスワードを入力してください</div>
+    <input id="pwInput" type="password" placeholder="Password"
+      style="width:100%;padding:12px 16px;font-size:14px;font-family:inherit;border:1.5px solid rgba(0,0,0,0.15);border-radius:8px;outline:none;box-sizing:border-box;margin-bottom:12px;"
+      onkeydown="if(event.key==='Enter')checkPw()">
+    <div id="pwError" style="display:none;font-size:12px;color:#A32D2D;margin-bottom:10px;">パスワードが違います</div>
+    <button onclick="checkPw()"
+      style="width:100%;padding:12px;font-size:14px;font-family:inherit;font-weight:600;background:#185FA5;color:#fff;border:none;border-radius:8px;cursor:pointer;">
+      ログイン
+    </button>
+  </div>
+</div>
+<script>
+(function(){
+  const HASH = '754bed8a4d4ebd37dabf4df62d2a35963e080956eb7d1e1ffd2d56bf1c882b91';
+  async function sha256(msg) {
+    const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(msg));
+    return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+  }
+  window.checkPw = async function() {
+    const val = document.getElementById('pwInput').value;
+    const hash = await sha256(val);
+    if (hash === HASH) {
+      document.getElementById('pwScreen').style.display = 'none';
+      sessionStorage.setItem('auth','1');
+    } else {
+      document.getElementById('pwError').style.display = 'block';
+      document.getElementById('pwInput').value = '';
+      document.getElementById('pwInput').focus();
+    }
+  };
+  if (sessionStorage.getItem('auth') === '1') {
+    document.addEventListener('DOMContentLoaded', () => {
+      const s = document.getElementById('pwScreen');
+      if(s) s.style.display = 'none';
+    });
+  }
+})();
+</script>
+
 <header>
   <h1>日本の博物館統計ダッシュボード</h1>
   <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;">
@@ -1807,21 +1851,91 @@ function setMapMode(mode) {
 
 // ===== PNG ダウンロード =====
 function makeFilename(title) {
-  // ファイル名に使えない文字を除去してmuseum_プレフィクスを付与
-  const safe = title.replace(/[\\/:*?"<>|]/g, '').replace(/\s+/g, '_').trim();
+  const safe = title.replace(/[\\/:\*?"<>|]/g, '').replace(/\s+/g, '_').trim();
   return 'museum_' + safe;
 }
 
+// 現在のON/OFF設定テキストを取得
+function getSettingsText(canvasId) {
+  const lines = [];
+  // 館種別グラフ：館種のON/OFF
+  if (canvasId === 'chartType') {
+    const c = charts['chartType'];
+    if (c) {
+      const on  = c.data.datasets.filter((_,i)=>!c.getDatasetMeta(i).hidden).map(d=>d.label);
+      const off = c.data.datasets.filter((_,i)=> c.getDatasetMeta(i).hidden).map(d=>d.label);
+      if (on.length  > 0) lines.push('表示: ' + on.join(', '));
+      if (off.length > 0) lines.push('非表示: ' + off.join(', '));
+    }
+  }
+  // 館種別来館者数グラフ
+  if (canvasId === 'chartVType') {
+    const c = charts['chartVType'];
+    if (c) {
+      const on  = c.data.datasets.filter((_,i)=>!c.getDatasetMeta(i).hidden).map(d=>d.label);
+      const off = c.data.datasets.filter((_,i)=> c.getDatasetMeta(i).hidden).map(d=>d.label);
+      if (on.length  > 0) lines.push('表示: ' + on.join(', '));
+      if (off.length > 0) lines.push('非表示: ' + off.join(', '));
+    }
+  }
+  // 都道府県別推移グラフ
+  if (canvasId === 'chartPrefLine') {
+    const c = charts['chartPrefLine'];
+    if (c) {
+      const on = c.data.datasets.filter((_,i)=>!c.getDatasetMeta(i).hidden).map(d=>d.label);
+      lines.push(on.length > 0 ? '表示: ' + on.join(', ') : '全て非表示');
+    }
+  }
+  // 地方別グラフ
+  if (canvasId === 'chartPrefRegion') {
+    const c = charts['chartPrefRegion'];
+    if (c) {
+      const on  = c.data.datasets.filter((_,i)=>!c.getDatasetMeta(i).hidden).map(d=>d.label);
+      const off = c.data.datasets.filter((_,i)=> c.getDatasetMeta(i).hidden).map(d=>d.label);
+      if (on.length  > 0) lines.push('表示地方: ' + on.join(', '));
+      if (off.length > 0) lines.push('非表示: ' + off.join(', '));
+    }
+  }
+  return lines;
+}
+
+// グラフcanvasにタイトル・設定を描き込んでPNG化
 function downloadChart(canvasId, title) {
   const canvas = document.getElementById(canvasId);
   if (!canvas) return;
+
+  const settingsLines = getSettingsText(canvasId);
+  const HEADER = 48 + (settingsLines.length > 0 ? settingsLines.length * 20 + 8 : 0);
+  const PADDING = 16;
+
   const out = document.createElement('canvas');
-  out.width  = canvas.width;
-  out.height = canvas.height;
+  out.width  = canvas.width + PADDING * 2;
+  out.height = canvas.height + HEADER + 16;
   const ctx = out.getContext('2d');
-  ctx.fillStyle = '#ffffff';
+
+  // 背景
+  ctx.fillStyle = '#f5f4f0';
   ctx.fillRect(0, 0, out.width, out.height);
-  ctx.drawImage(canvas, 0, 0);
+  ctx.fillStyle = '#ffffff';
+  ctx.fillRect(0, HEADER, out.width, out.height - HEADER);
+
+  // タイトル
+  ctx.fillStyle = '#1a1917';
+  ctx.font = 'bold 15px "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif';
+  ctx.fillText(title, PADDING, 30);
+
+  // 設定テキスト
+  if (settingsLines.length > 0) {
+    ctx.font = '11px "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif';
+    ctx.fillStyle = '#6b6860';
+    settingsLines.forEach((line, i) => {
+      ctx.fillText(line, PADDING, 50 + i * 20);
+    });
+  }
+
+  // グラフを貼り付け
+  ctx.drawImage(canvas, PADDING, HEADER);
+
   const a = document.createElement('a');
   a.href = out.toDataURL('image/png');
   a.download = makeFilename(title) + '.png';
@@ -1831,20 +1945,52 @@ function downloadChart(canvasId, title) {
 function downloadSVGasPNG(svgId, title) {
   const svg = document.getElementById(svgId);
   if (!svg) return;
+
+  // 現在の地図モードと凡例テキストを取得
+  const modeLabels = {'delta':'H17→R6 増減', 'r6':'R6 館数', 'h17':'H17 館数'};
+  const modeText = '表示モード: ' + (modeLabels[currentMapMode] || currentMapMode);
+  const legendEl = document.getElementById('mapLegend');
+  const legendItems = legendEl ? Array.from(legendEl.querySelectorAll('div')).map(d=>d.textContent.trim()) : [];
+
   const svgData = new XMLSerializer().serializeToString(svg);
   const svgBlob = new Blob([svgData], {type: 'image/svg+xml;charset=utf-8'});
   const url = URL.createObjectURL(svgBlob);
   const img = new Image();
   const bbox = svg.getBoundingClientRect();
-  const scale = 2; // Retina対応
+  const scale = 2;
+
+  const HEADER = 56 + legendItems.length * 18 + 8;
+  const PADDING = 16;
+
   img.onload = () => {
     const canvas = document.createElement('canvas');
-    canvas.width  = bbox.width  * scale;
-    canvas.height = bbox.height * scale;
+    canvas.width  = (bbox.width + PADDING * 2) * scale;
+    canvas.height = (bbox.height + HEADER + 16) * scale;
     const ctx = canvas.getContext('2d');
-    ctx.fillStyle = '#ffffff';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.scale(scale, scale);
+
+    // 背景
+    ctx.fillStyle = '#f5f4f0';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, HEADER, canvas.width, canvas.height);
+
+    // タイトル
+    ctx.fillStyle = '#1a1917';
+    ctx.font = 'bold 15px "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif';
+    ctx.fillText(title, PADDING, 30);
+
+    // モード
+    ctx.font = '11px "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif';
+    ctx.fillStyle = '#6b6860';
+    ctx.fillText(modeText, PADDING, 50);
+
+    // 凡例
+    legendItems.forEach((item, i) => {
+      ctx.fillText(item, PADDING, 70 + i * 18);
+    });
+
+    // 地図SVG
     ctx.drawImage(img, 0, 0, bbox.width, bbox.height);
     URL.revokeObjectURL(url);
     const a = document.createElement('a');

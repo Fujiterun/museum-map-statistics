@@ -772,25 +772,52 @@
   <!-- 財政ラグ分析タブ -->
   <div class="tab-panel" id="tab-laganalysis">
     <div style="font-size:12px;color:var(--text2);margin-bottom:14px;padding:10px 14px;background:var(--surface);border:1px solid var(--border);border-radius:8px;">
-      財政指標の「n年前の値」と閉館件数の相関を分析します。ラグをずらすことで閉館の先行指標としての有効性を検証できます。
+      財政指標の「n年前の値」と閉館件数の相関を分析します。ラグをずらすことで閉館の先行指標としての有効性を検証できます。出典：地方公共団体の主要財政指標（総務省）
+    </div>
+
+    <!-- 全組み合わせマトリクス -->
+    <div class="chart-card">
+      <div class="chart-title">全組み合わせ 相関係数マトリクス（コロナ除外後）</div>
+      <div style="overflow-x:auto;">
+        <table id="lagMatrix" style="width:100%;border-collapse:collapse;font-size:12px;"></table>
+      </div>
+      <div style="margin-top:8px;font-size:11px;color:var(--text3);">セルの色：青=正相関、赤=負相関。濃いほど相関が強い。セルをクリックすると下の散布図が切り替わります。</div>
+      <div style="margin-top:12px;padding:10px 14px;background:var(--surface2);border-left:3px solid var(--accent);border-radius:0 6px 6px 0;font-size:12px;color:var(--text2);line-height:1.8;">
+        <strong>【自己相関・偏相関の検証結果】</strong><br>
+        閉館件数の自己相関（lag=1: r=−0.25）は弱く、閉館の年をまたいだ連鎖はほとんどない。経常収支比率lag=1の<strong>偏相関係数は0.512</strong>（閉館の自己相関を除去後）で、単純相関の0.524からほぼ変化なし。<strong>経常収支比率lag=1は、閉館の連鎖効果に依存しない独立した先行指標である可能性が統計的に支持される。</strong>
+      </div>
+    </div>
+
+    <!-- 初期散布図（経常収支比率×閉館 lag=0） -->
+    <div class="chart-card">
+      <div class="chart-title-row">
+        <div class="chart-title" id="lagChartTitle">散布図：経常収支比率（同年）× 閉館件数</div>
+        <button class="dl-btn" onclick="downloadChart('chartLagScatter','財政ラグ分析_散布図')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> PNG</button>
+      </div>
+      <div class="legend">
+        <span><span class="legend-dot" style="background:rgba(24,95,165,0.65);border-radius:50%"></span>通常年</span>
+        <span><span class="legend-dot" style="background:rgba(130,130,130,0.4);border-radius:50%"></span>R2・R3（除外対象）</span>
+        <span><span class="legend-dot" style="background:#EF9F27;border-radius:2px"></span>全体近似線</span>
+        <span><span class="legend-dot" style="background:#185FA5;border-radius:2px"></span>コロナ除外近似線</span>
+      </div>
+      <div id="lagRDisplay" style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:10px;"></div>
+      <div style="position:relative;height:360px;"><canvas id="chartLagScatter" role="img"></canvas></div>
     </div>
 
     <!-- 設定パネル -->
     <div class="chart-card" style="margin-bottom:16px;">
       <div class="chart-title">分析設定</div>
       <div style="display:flex;flex-wrap:wrap;gap:20px;align-items:flex-start;">
-
         <div>
           <div style="font-size:12px;color:var(--text2);margin-bottom:6px;font-weight:600;">財政指標（X軸）</div>
           <div style="display:flex;flex-direction:column;gap:4px;" id="lagFiscBtns">
-            <button class="lag-sel-btn active" data-fisc="財政力指数"     onclick="setLagFisc(this)">財政力指数</button>
-            <button class="lag-sel-btn"        data-fisc="経常収支比率"   onclick="setLagFisc(this)">経常収支比率</button>
+            <button class="lag-sel-btn" data-fisc="財政力指数"     onclick="setLagFisc(this)">財政力指数</button>
+            <button class="lag-sel-btn active" data-fisc="経常収支比率"   onclick="setLagFisc(this)">経常収支比率</button>
             <button class="lag-sel-btn"        data-fisc="実質公債費比率" onclick="setLagFisc(this)">実質公債費比率</button>
             <button class="lag-sel-btn"        data-fisc="将来負担比率"   onclick="setLagFisc(this)">将来負担比率</button>
             <button class="lag-sel-btn"        data-fisc="ラスパイレス指数" onclick="setLagFisc(this)">ラスパイレス指数</button>
           </div>
         </div>
-
         <div>
           <div style="font-size:12px;color:var(--text2);margin-bottom:6px;font-weight:600;">目的変数（Y軸）</div>
           <div style="display:flex;flex-direction:column;gap:4px;">
@@ -798,7 +825,6 @@
             <button class="lag-sel-btn"        data-yvar="減少合計" onclick="setLagY(this)">減少合計（閉館＋除外）</button>
           </div>
         </div>
-
         <div>
           <div style="font-size:12px;color:var(--text2);margin-bottom:6px;font-weight:600;">ラグ（何年前の財政指標を使うか）</div>
           <div style="display:flex;gap:6px;">
@@ -832,31 +858,7 @@
       </div>
     </div>
 
-    <!-- 散布図 -->
-    <div class="chart-card">
-      <div class="chart-title-row">
-        <div class="chart-title" id="lagChartTitle">散布図</div>
-        <button class="dl-btn" onclick="downloadChart('chartLagScatter','財政ラグ分析_散布図')"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> PNG</button>
-      </div>
-      <div class="legend">
-        <span><span class="legend-dot" style="background:rgba(24,95,165,0.65);border-radius:50%"></span>通常年</span>
-        <span><span class="legend-dot" style="background:rgba(130,130,130,0.4);border-radius:50%"></span>R2・R3（除外対象）</span>
-        <span><span class="legend-dot" style="background:#EF9F27;border-radius:2px"></span>全体近似線</span>
-        <span><span class="legend-dot" style="background:#185FA5;border-radius:2px"></span>コロナ除外近似線</span>
-      </div>
-      <div id="lagRDisplay" style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:10px;"></div>
-      <div style="position:relative;height:360px;"><canvas id="chartLagScatter" role="img"></canvas></div>
-    </div>
-
-    <!-- 全組み合わせマトリクス -->
-    <div class="chart-card" style="margin-top:0;">
-      <div class="chart-title">全組み合わせ 相関係数マトリクス（コロナ除外後）</div>
-      <div style="overflow-x:auto;">
-        <table id="lagMatrix" style="width:100%;border-collapse:collapse;font-size:12px;"></table>
-      </div>
-      <div style="margin-top:8px;font-size:11px;color:var(--text3);">セルの色：青=正相関、赤=負相関。濃いほど相関が強い。</div>
-    </div>
-
+    <!-- 分析メモ -->
     <div class="analysis" id="lagAnalysisBox">
       <h3>分析メモ</h3>
       <ul id="lagAnalysisList"></ul>
@@ -2414,7 +2416,7 @@ const LAG_DATA = {"財政力指数__閉館":{"0":{"r_all":0.412,"r_excl":0.452,"
 const FISC_LABELS = ['財政力指数','経常収支比率','実質公債費比率','将来負担比率','ラスパイレス指数'];
 const LAG_LABELS = ['同年（lag=0）','1年前（lag=1）','2年前（lag=2）','3年前（lag=3）'];
 
-let lagCurrentFisc = '財政力指数';
+let lagCurrentFisc = '経常収支比率';
 let lagCurrentY    = '閉館';
 let lagCurrentLag  = 0;
 
@@ -2584,9 +2586,13 @@ function updateAnalysisMemo(key){
   const memos = {
     '財政力指数__閉館':    ['財政力指数はlag=0（+0.41）・lag=1（+0.37）で正相関。財政的に豊かな年ほど閉館が多い傾向は翌年も継続するか）。lag=2以降は負に転じており、2年以上前の財政力は現在の閉館と逆相関になる。','コロナ除外ではlag=0（+0.45）が最大。1年ラグでも+0.29と中程度を維持しており、前年の財政状況が翌年の閉館判断に反映されるプロセスが示唆されるか）。'],
     '財政力指数__減少合計':['lag=1でr=+0.45と同年（+0.39）より高くなる点が注目。財政力が高い→翌年に施設整理（移管・廃止）が進む流れを示すか）。','lag=3でコロナ除外後r=−0.35と負に転じており、3年前の財政状況は現在の減少と逆相関になる複雑な関係がある。'],
-    '経常収支比率__閉館':  ['lag=1でr=+0.50（全体）・+0.52（コロナ除外）と全組み合わせ中で最強の相関。前年の財政硬直化が翌年の閉館判断に強く結びついている可能性か）。','lag=0はコロナ除外後+0.46だが全体では−0.09と符号が逆転する不安定さがある。lag=1の方が頑健な指標といえるか）。'],
-    '経常収支比率__減少合計':['lag=1でr=+0.48（全体）・+0.48（コロナ除外）と安定した正相関。経常収支の硬直化が翌年の施設整理に反映されるか）。'],
-    '実質公債費比率__閉館': ['全ラグで一貫して負相関（lag=0: −0.34）。借金返済負担が重い年ほど閉館が少ない逆説的な傾向が持続するか）。ラグをずらしても符号は変わらない。'],
+    '経常収支比率__閉館':  [
+      'lag=1でr=+0.50（全体）・<strong>+0.52（コロナ除外）と全組み合わせ中で最強の相関</strong>。前年の財政硬直化が翌年の閉館判断に強く結びついている可能性か）。lag=2で負（−0.31）に転じるのは「財政悪化→1年後に閉館→財政が回復する揺り戻し」のサイクルを反映しているか）。',
+      '<strong>【自己相関・偏相関による検証】</strong>閉館件数自体の自己相関（lag=1: r=−0.25）は弱く、「去年閉館が多かったから今年も多い」という連鎖はほとんど見られない。さらに「前年の閉館件数」の影響を統計的に除去した偏相関係数は<strong>0.512（単純相関0.524からほぼ変化なし）</strong>。経常収支比率lag=1の予測力は閉館の連鎖効果に依存しておらず、独立した先行指標として機能している可能性が統計的に支持される。',
+      'サイレント閉館調査の観点では、<strong>「前年度の経常収支比率が高止まりしている自治体の博物館は翌年に閉館リスクが高い」</strong>というアラート指標として活用できる可能性か）。'
+    ],
+    '経常収支比率__減少合計':['lag=1でr=+0.48（全体）・+0.48（コロナ除外）と安定した正相関。経常収支の硬直化が翌年の施設整理（移管・廃止）に反映されるか）。'],
+    '実質公債費比率__閉館': ['全ラグで一貫して負相関（lag=0: −0.34）。借金返済負担が重い年ほど閉館が少ない逆説的な傾向が持続するか）。ラグをずらしても符号は変わらない。財政難でも閉館という政治的判断を回避している可能性か）。'],
     '将来負担比率__閉館':   ['lag=2でコロナ除外後r=−0.44と最大の負相関。2年前の将来負担が重いほど現在の閉館が少ない傾向か）。将来負担が重い自治体は閉館という判断自体を回避している可能性。'],
     '将来負担比率__減少合計':['lag=0でコロナ除外後r=+0.52。将来負担比率が高い年の除外（移管等）が多い傾向。閉館より移管という形で対処しているか）。'],
     'ラスパイレス指数__閉館':['全ラグでほぼ無相関〜弱い負相関。公務員給与水準は閉館件数との直接的な連動は見られない。'],
